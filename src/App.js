@@ -1,17 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-import Signup from '../src/Authentication/Signup'
-import { BrowserRouter, Routes,
-  Route } from "react-router-dom";
-import Signin from './Authentication/Signin';
+import Registration from './Components/Authentication/Registration'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Login from './Components/Authentication/Login';
+import Otp from './Components/Authentication/Otp';
+import ResetPasswordEmail from './Components/Authentication/ResetPasswordEmail';
+import ResetPassword from './Components/Authentication/ResetPassword';
+
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/signin" element={<Signin />} />
-      </Routes>
-    
+      {/* <Header /> */}
+      <Switch>
+        <Route exact path="/otp-verify" component={Otp} />
+        <Route exact path="/registration" component={Registration} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/password-reset-email" component={ResetPasswordEmail} />
+        <Route exact path="/password-reset/:token" component={ResetPassword} />
+      </Switch>
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
