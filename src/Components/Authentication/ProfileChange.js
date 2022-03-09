@@ -3,11 +3,13 @@ import { useAlert } from "react-alert";
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { userProfileAction, getUserData } from '../../Actions/AuthenticationAction'
+import { useHistory } from 'react-router-dom'
 
 const ProfileChange = () => {
 
     const userInfo = JSON.parse(localStorage.getItem('user-details'))
     const dispatch = useDispatch()
+    const history = useHistory()
     const { profile } = useSelector((state) => state.profile)
     const { user } = useSelector((state) => state.user)
     
@@ -33,7 +35,6 @@ const ProfileChange = () => {
         } catch(error){
             setImageSignal(false)
         }
-        
       };
     
     const changeProfile = async () => {
@@ -55,11 +56,12 @@ const ProfileChange = () => {
         const { data } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/authentication/user-profile-change/${id}/`, myForm, config)
         if (data.status === 202){
             alert.success(data.details)
+            history.push('/profile')
             return
         } else{
             alert.error("not updated!")
+            return
         }
-        
     }
       
     useEffect(() => {
