@@ -1,0 +1,119 @@
+/* otp css */
+.zetamed_main_otp_heading{
+    text-align: center;
+    font-family: 'Public Sans', sans-serif;
+    color: #292563;
+    font-weight: 600;
+    font-size: 30px;
+    padding: 10px;
+}
+.zetamed_main_otp_input{
+    height: 480px;
+    width: 40%;
+    background-color: white;
+    margin: 40px;
+    border-radius: 10px;
+}
+.zetamed_main_otp_reg{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+}
+
+.zetamed_main_otp_inputname{
+    font-family: 'Public Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+
+}
+
+.zetamed_main_otp_actualinput{
+    font-family: 'Public Sans', sans-serif;
+
+    width: 100%;
+    height: 27px;
+    padding: 7px;
+    font-size: 15px;
+    border-width: 0px;
+    border-color: #f2e1e1;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: groove;
+    border-radius: 3px;
+    box-shadow: 0px 0px 3px rgba(2,4,21,.73);
+    text-shadow: 19px 19px 6px rgba(6,5,35,.91);
+
+}
+
+
+.zetamed_main_otp_actualinput:focus{
+    outline: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.zetamed_otp_verify_button_css{
+    background: linear-gradient(45deg, #5548A7 30%, #6550ee 90%);
+    border-radius: 3px;
+    border: 0;
+    color: white;
+    height: 40px;
+    width: 100%;
+    padding: 0 30px;
+    box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+    cursor: pointer;
+    font-family: 'Public Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.zetamed_otp_verfy_loginhere{
+    font-family: 'Public Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+
+@media screen and (max-width: 780px) {
+    .zetamed_main_otp_input{
+        height: 480px;
+        width: 100%;
+        background-color: white;
+        margin: 0px;
+        border-radius: 10px
+    }
+    .zetamed_main_otp_heading{
+    background-color: #EFF4FB;
+    }
+  }
+
+
+
+  /* profile css */
+
+  .zetamed_profile_name{
+    font-family: 'Public Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 15px;
+    color: black;
+  }
+  .zetamed_profile{
+      padding: 20px 140px 0 40px;
+  }
+  @media screen and (max-width: 780px) {
+    .zetamed_profile{
+        padding: 10px;
+    }
+  }

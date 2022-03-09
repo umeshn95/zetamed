@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { useAlert } from "react-alert";
 import axios from 'axios'
-
+import Grid from "@mui/material/Grid";
 const PasswordChange = () => {
     const alert = useAlert();
     const [oldPassword, setOldPassword] = useState("");
@@ -44,7 +44,98 @@ const PasswordChange = () => {
 
     return (
         <Fragment>
-            <div >
+            <Grid container>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <div className="zetamed_main_otp_heading">ZetaMed</div>
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={12}
+        lg={12}
+        xl={12}
+        style={{ backgroundColor: "#EFF4FB" }}
+      >
+        <div className="zetamed_main_otp_reg">
+          <div className="zetamed_main_otp_input">
+            {/* full name */}
+
+            <Grid container style={{ padding: "50px" }} spacing={1.5}>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">Old Password</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                {" "}
+                <input
+                  className="zetamed_main_otp_actualinput"
+                  type="password"
+                  placeholder="Old Password"
+                  required
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
+                />
+              </Grid>
+
+              {/* email */}
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">New Password</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                {" "}
+                <input
+                  className="zetamed_main_otp_actualinput"
+                  type="password"
+                  placeholder="New Password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Grid>
+              {/* email */}
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">Confirm Password</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                {" "}
+                <input
+                  className="zetamed_main_otp_actualinput"
+                  type="password"
+                  placeholder="Confirm Password"
+                  required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </Grid>
+
+             
+
+              {/* mobile number */}
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">&nbsp;</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+              
+                  <button
+                    className="zetamed_otp_verify_button_css"
+                    onClick={() => updatePasswordSubmit()}
+                  >
+                    Update Password
+                  </button>
+                
+                {/* <div className=''>
+          if allready verify otp so <Link to="/registration">click here</Link>
+        </div> */}
+                
+              </Grid>
+            </Grid>
+          </div>
+        </div>
+        <Grid></Grid>
+      </Grid>
+
+            {/* <div >
                 <input
                     type="password"
                     placeholder="Old Password"
@@ -71,7 +162,7 @@ const PasswordChange = () => {
                 <br />
                 <button onClick={() => updatePasswordSubmit()}>Change Password</button>
 
-            </div>
+            </div> */}
         </Fragment>
     );
 };
