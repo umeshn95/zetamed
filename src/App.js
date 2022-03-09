@@ -1,5 +1,5 @@
-import Prodected from './Components/Routers/Prodected'
 import Registration from './Components/Authentication/Registration'
+import Prodected from './Components/Routers/Prodected'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Login from './Components/Authentication/Login';
 import Otp from './Components/Authentication/Otp';
@@ -20,8 +20,9 @@ function App() {
         <Route exact path="/password-reset-email" component={ResetPasswordEmail} />
         <Route exact path="/password-reset/:token" component={ResetPassword} />
 
+        
     {/* Prodected Route */}
-        <Prodected exact path="/password-change" component={PasswordChange} />
+    <Prodected exact path="/password-change" component={PasswordChange} />
         <Prodected exact path="/profile" component={Profile} />
         <Prodected exact path="/profile-change" component={ProfileChange} />
       </Switch>

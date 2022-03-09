@@ -24,6 +24,3 @@ export const getUserData = () => async (dispatch) => {
     let { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/authentication/check-user/${userInfo.token}/`)
     dispatch({ type: SUCCESS_REGISTRATION, payload: data })
 }
-
-
-

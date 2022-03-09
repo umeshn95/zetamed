@@ -2,7 +2,8 @@ import { React, useState, Fragment } from 'react'
 import { useAlert } from "react-alert";
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import Grid from "@mui/material/Grid";
 import {
   SUCCESS_REGISTRATION,
 } from '../../Constants/AuthenticationConstants'
@@ -51,15 +52,192 @@ const Registration = () => {
       })
   }
 
+
+
   return (
     <Fragment>
-      <div>
+
+<Grid container>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <div className="zetamed_main_otp_heading">ZetaMed Registration</div>
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={12}
+        lg={12}
+        xl={12}
+        style={{ backgroundColor: "#EFF4FB",height:'900px' }}
+      >
+        <div className="zetamed_main_otp_reg">
+          <div className="zetamed_main_otp_input" style={{height:"130vh"}}>
+
+            <Grid container style={{ padding: "50px" }} spacing={1.5}>
+            {/* first name */}
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">First Name</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                {" "}
+                <input
+                  className="zetamed_main_otp_actualinput"
+                  type="text"
+                  placeholder="Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </Grid>
+              
+
+              {/* last Name */}
+              {/* <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">Last Name</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                {" "}
+                <input
+                  className="zetamed_main_otp_actualinput"
+                  type="email"
+                  placeholder="Email"
+                  required
+                  value={email}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </Grid>
+         */}
+              {/* doctor select */}
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">I'm</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                {" "}
+                <select  className="zetamed_main_otp_actualinput" style={{height:'40px'}} onChange={(e) => setIAm(e.target.value)}>
+          <option value="Select">Select</option>
+          <option value="Doctore">Doctor</option>
+          <option value="Other">Other</option>
+        </select>
+              </Grid>
+
+                   {/* clinic Name */}
+                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">Clinic Name</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                {" "}
+                <input
+                  className="zetamed_main_otp_actualinput"
+                  type="text"
+          placeholder="Clinic Name"
+          value={clinicName}
+          onChange={(e) => setClinicName(e.target.value)}
+                />
+              </Grid>
+                   {/* speciality Name */}
+                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">Email</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                {" "}
+                <input
+                  className="zetamed_main_otp_actualinput"
+                  type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+                />
+              </Grid>
+                   {/* Mobile No. */}
+                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">Mobile Number</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                {" "}
+                <input
+                  className="zetamed_main_otp_actualinput"
+                  type="number"
+                  placeholder="Verify Mobile No."
+                  disabled={localStorage.getItem('mobileNo') ? true : false}
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                />
+              </Grid>
+                   {/* Pwd. */}
+                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">Create Password</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                {" "}
+                <input
+                  className="zetamed_main_otp_actualinput"
+                  type="password"
+                  placeholder="Create Password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Grid>
+                   {/*  confirm Pwd. */}
+                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">Confirm Password</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                {" "}
+                <input
+                  className="zetamed_main_otp_actualinput"
+                  type="password"
+          placeholder="Confirm Password"
+          required
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </Grid>
+
+              {/* mobile number */}
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_main_otp_inputname">&nbsp;</div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+              
+                  <button
+                    className="zetamed_otp_verify_button_css"
+                    onClick={() => registrationFunc()}
+                  >
+                    Register
+                  </button>
+                
+                {/* <div className=''>
+          if allready verify otp so <Link to="/registration">click here</Link>
+        </div> */}
+                <div className="zetamed_otp_verfy_loginhere">
+                If Already Registered <Link to="/login">click here</Link> to Login      </div>
+              </Grid>
+            </Grid>
+          </div>
+        </div>
+        <Grid></Grid>
+      </Grid>
+
+
+
+
+
+
+
+      {/* <div>
         <div>Signin</div>
         <input
           type="text"
-          placeholder="Name"
+          placeholder="First Name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
         />
 
         <select onChange={(e) => setIAm(e.target.value)}>
@@ -115,7 +293,7 @@ const Registration = () => {
 
         <br />
         <button onClick={() => registrationFunc()}>Submit</button>
-      </div>
+      </div> */}
     </Fragment>
   )
 }
