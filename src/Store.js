@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { RegistrationReducer } from './Components/Reducers/AuthenticationReducers'
+import { RegistrationReducer, ProfileReducer } from './Reducers/AuthenticationReducers'
 
 const Store = configureStore({
     reducer : {
-        registration : RegistrationReducer
+        user : RegistrationReducer,
+        profile : ProfileReducer,
     } 
 })
 

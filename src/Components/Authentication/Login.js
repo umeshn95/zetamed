@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useHistory } from "react-router-dom";
 import {
   SUCCESS_REGISTRATION,
-} from '../Constants/AuthenticationConstants'
+} from '../../Constants/AuthenticationConstants'
 
 const Login = () => {
   const alert = useAlert();
@@ -27,7 +27,7 @@ const Login = () => {
             type: SUCCESS_REGISTRATION,
             payload: response.data,
           })
-          localStorage.setItem("user-details", JSON.stringify(response.data.data));
+          localStorage.setItem("user-details", JSON.stringify(response.data));
           alert.success("Login Successfully")
           history.push('/')
         })
