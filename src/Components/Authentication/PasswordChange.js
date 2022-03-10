@@ -2,11 +2,13 @@ import React, { Fragment, useState } from "react";
 import { useAlert } from "react-alert";
 import axios from 'axios'
 import Grid from "@mui/material/Grid";
+import Loader from "../Loading/Loader";
 const PasswordChange = () => {
     const alert = useAlert();
     const [oldPassword, setOldPassword] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [cusLoading, setCusLoading] = useState(false);
 
     const updatePasswordSubmit = async () => {
         if (password.length < 8 || confirmPassword.length < 8) {
@@ -15,6 +17,7 @@ const PasswordChange = () => {
         if (password !== confirmPassword) {
             return alert.error("Password did not Match!")
         }
+        setCusLoading(true)
         try {
             let old_password = oldPassword
             let new_password = password
@@ -32,15 +35,22 @@ const PasswordChange = () => {
                         alert.error("Your password not Changed!!!")
                     }
                 })
+                setCusLoading(false)
         } catch (error) {
             if (error.response.status === 400){
                 alert.error("Old Password is Wrong")
-                return
+            } else{
+              alert.error("fill strong and proper password!!!")
             }
-            alert.error("fill strong and proper password!!!")
-            return
+            setCusLoading(false)
         }
     };
+
+    if(cusLoading){
+      return (
+        <Loader />
+      )
+    }
 
     return (
         <Fragment>

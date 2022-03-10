@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
 
 import { SUCCESS_REGISTRATION } from "../../Constants/AuthenticationConstants";
+import Loader from "../Loading/Loader";
 
 const Login = () => {
   const alert = useAlert();
@@ -14,18 +15,16 @@ const Login = () => {
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [cusLoading, setCusLoading] = useState(false);
 
   const LoginFunc = async () => {
+    setCusLoading(true)
     let item = { username, password };
     // if (password.length < 8) {
     //   return alert.error("Password should be 8 digit!")
     // }
     try {
-      await axios
-        .post(
-          `${process.env.REACT_APP_BACKEND_URL}/api/authentication/user-login/`,
-          item
-        )
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/authentication/user-login/`,item)
         .then((response) => {
           dispatch({
             type: SUCCESS_REGISTRATION,
@@ -38,10 +37,18 @@ const Login = () => {
           alert.success("Login Successfully");
           history.push("/");
         });
+        setCusLoading(false)
     } catch (error) {
       alert.error(error.response.data.detail);
+      setCusLoading(false)
     }
   };
+
+  if(cusLoading){
+    return (
+      <Loader />
+    )
+  }
 
   return (
     <Fragment>
