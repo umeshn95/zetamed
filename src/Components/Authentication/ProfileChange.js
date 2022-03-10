@@ -8,26 +8,25 @@ import {
 } from "../../Actions/AuthenticationAction";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import { useHistory } from 'react-router-dom'
+import Loader from "../Loading/Loader";
+
 
 const ProfileChange = () => {
   const userInfo = JSON.parse(localStorage.getItem("user-details"));
   const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.profile);
+  const { profile, loading } = useSelector((state) => state.profile);
   const { user } = useSelector((state) => state.user);
 
   const alert = useAlert();
-  const [firstName, setFirstName] = useState(
-    user && user && user.data && user.data[0].first_name
-  );
-  const [speciality, setSpeciality] = useState(
-    profile && profile && profile.data && profile.data[0].speciality
-  );
-  const [clinicName, setClinicName] = useState(
-    profile && profile && profile.data && profile.data[0].clinicName
-  );
+  const history = useHistory();
+  const [firstName, setFirstName] = useState("");
+  const [speciality, setSpeciality] = useState("");
+  const [clinicName, setClinicName] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [imgSignal, setImageSignal] = useState();
   const [letestImg, setLetestImg] = useState("");
+  const [cusLoading, setCusLoading] = useState(false);
 
   const updateProfileDataChange = (e) => {
     try {
@@ -46,6 +45,7 @@ const ProfileChange = () => {
   };
 
   const changeProfile = async () => {
+    setCusLoading(true)
     let id = user && user && user.data && user.data[0].id;
     let profileImage = selectedImage;
     const myForm = new FormData();
@@ -74,10 +74,13 @@ const ProfileChange = () => {
     );
     if (data.status === 202) {
       alert.success(data.details);
-      return;
+      dispatch(userProfileAction())
+      dispatch(getUserData())
+      history.push('/profile')
     } else {
       alert.error("not updated!");
     }
+    setCusLoading(false)
   };
 
   useEffect(() => {
@@ -87,7 +90,21 @@ const ProfileChange = () => {
     if (user && user.length === 0) {
       dispatch(getUserData());
     }
+    const setFunction = () => {
+      if (profile && profile.length !== 0) {
+        setFirstName(user && user && user.data && user.data[0].first_name)
+        setSpeciality(profile && profile && profile.data && profile.data[0] && profile.data[0].speciality)
+        setClinicName(profile && profile && profile.data && profile.data[0] && profile.data[0].clinicName)
+      }
+    }
+    setFunction()
   }, [dispatch, profile, user]);
+
+  if (loading || cusLoading) {
+    return (
+      <Loader />
+    )
+  }
 
   return (
     <Fragment>
@@ -111,25 +128,24 @@ const ProfileChange = () => {
                   src={
                     imgSignal
                       ? letestImg
-                      : `${process.env.REACT_APP_BACKEND_URL}${
-                          profile &&
-                          profile &&
-                          profile.data &&
-                          profile.data[0].profileImage
-                        }`
+                      : `${process.env.REACT_APP_BACKEND_URL}${profile &&
+                      profile &&
+                      profile.data &&
+                      profile.data[0].profileImage
+                      }`
                   }
                   alt="Avatar Preview"
                 />
-                        <br />
-                        <input
-                            style={{"border":"5px solid #ccc","display":"inline-block","padding":"6px 12px","cursor":"pointer"}}
-                            
-            type="file"
-            name="avatar"
-            accept="image/*"
-                            onChange={updateProfileDataChange}
-                            placeholder='upload image'
-          />
+                <br />
+                <input
+                  style={{ "border": "5px solid #ccc", "display": "inline-block", "padding": "6px 12px", "cursor": "pointer" }}
+
+                  type="file"
+                  name="avatar"
+                  accept="image/*"
+                  onChange={updateProfileDataChange}
+                  placeholder='upload image'
+                />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
@@ -234,21 +250,21 @@ const ProfileChange = () => {
                       </Grid>
                     </Grid>
                   </div>
-                 
-                
 
-                 
-                 
-                            <Link to='/profile'>
-                            <button
+
+
+
+
+                  <Link to='/profile'>
+                    <button
                       className="zetamed_otp_verify_button_css"
-                                style={{ marginTop: "50px" }}
-                                onClick={() => changeProfile()}
+                      style={{ marginTop: "50px" }}
+                      onClick={() => changeProfile()}
                     >
                       Update Profile
                     </button>
-                            </Link>
-                 
+                  </Link>
+
                 </div>
               </Grid>
             </Grid>

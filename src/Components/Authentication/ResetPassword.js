@@ -3,13 +3,15 @@ import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
+import Loader from "../Loading/Loader";
 
 const ResetPassword = ({ match }) => {
   let token = match.params.token;
+  const alert = useAlert();
   const history = useHistory();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const alert = useAlert();
+  const [cusLoading, setCusLoading] = useState(false);
 
   const resetPassword = async () => {
     let item = { password, token };
@@ -19,12 +21,9 @@ const ResetPassword = ({ match }) => {
     if (password !== confirmPassword) {
       return alert.error("Password did not Match!");
     }
+    setCusLoading(true)
     try {
-      await axios
-        .post(
-          `${process.env.REACT_APP_BACKEND_URL}/api/authentication/password_reset/confirm/`,
-          item
-        )
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/authentication/password_reset/confirm/`, item)
         .then((response) => {
           if (response.status === 200) {
             alert.success("Your password reseted.");
@@ -32,12 +31,19 @@ const ResetPassword = ({ match }) => {
           } else {
             alert.error("Your password not reseted!!!");
           }
+          setCusLoading(false)
         });
     } catch (error) {
       alert.error("fill strong and proper password!!!");
+      setCusLoading(false)
     }
   };
 
+  if (cusLoading) {
+    return (
+      <Loader />
+    )
+  }
   return (
     <Fragment>
       <Grid container>
@@ -102,8 +108,8 @@ const ResetPassword = ({ match }) => {
                   Reset Password
                 </button>
 
-              
-                
+
+
               </Grid>
             </Grid>
           </div>
@@ -111,7 +117,7 @@ const ResetPassword = ({ match }) => {
         <Grid></Grid>
       </Grid>
 
-     
+
     </Fragment>
   );
 };
