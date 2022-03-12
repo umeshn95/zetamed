@@ -14,6 +14,7 @@ import Profile from './Components/Authentication/Profile';
 // Patient
 import PatientList from './Components/Patient/PatientList';
 import PatientInfo from './Components/Patient/PatientInfo';
+import AddPatient from './Components/Patient/AddPatient';
 
 function App() {
   return (
@@ -22,8 +23,8 @@ function App() {
       <Switch>
 
       {/* Authentications */}
-        <Route exact path="/otp-verify" component={Otp} />
-        <Route exact path="/registration" component={Registration} />
+        <Prodected exact path="/otp-verify" component={Otp} />
+        <Prodected exact path="/registration" component={Registration} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/password-reset-email" component={ResetPasswordEmail} />
         <Route exact path="/password-reset/:token" component={ResetPassword} />
@@ -34,6 +35,7 @@ function App() {
        {/*Patients  */}
        <Prodected exact path="/patient" component={PatientList} />
        <Prodected exact path="/patient/:id" component={PatientInfo} />
+       <Prodected exact path="/add-patient" component={AddPatient} />
 
       </Switch>
       {/* <Footer /> */}
