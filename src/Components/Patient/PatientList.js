@@ -1,20 +1,35 @@
-import { React, useEffect, Fragment,useState } from "react";
+import { React, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { patientAction } from "../../Actions/PatientAction";
 import { Link } from "react-router-dom";
 import Loader from "../Loading/Loader";
 import Grid from "@mui/material/Grid";
+
 import "./styles.css";
+
+import Pagination from '@mui/material/Pagination';
+import { formatDistanceToNow } from "date-fns";
 
 const PatientList = () => {
   const { patient, loading } = useSelector((state) => state.patient);
   const dispatch = useDispatch();
 
+  let result = formatDistanceToNow(
+    new Date(2016, 0, 1)
+   
+  ) 
+ 
+
+
   useEffect(() => {
     if (patient && patient.length === 0) {
       dispatch(patientAction());
     }
+  
+    
+
   }, [dispatch, patient]);
+
 
   if (loading) {
     return <Loader />;
@@ -94,9 +109,8 @@ const PatientList = () => {
         {patient &&
           patient.data &&
           patient.data.map((e, i) => (
-            <>
               
-              <Grid
+              <Grid key={i}
                 item
                 xs={12}
                 sm={12}
@@ -135,7 +149,7 @@ const PatientList = () => {
                           </Grid>
                         </Grid>
                         <Grid item xs={5} sm={5} md={6} lg={6} xl={6}>
-                          <div><span className="bold">Age:</span> {e.age}</div>
+                          <div><span className="bold">Age:</span> {e.age} {result}</div>
                           <div><span className="bold">Email:</span> {e.email}</div>
                           <div><span className="bold">Mobile No:</span> {e.mobileNo}</div>
                           <div><span className="bold">Group:</span>20oct</div>
@@ -144,7 +158,7 @@ const PatientList = () => {
                         <Grid item xs={0} sm={0} md={2} lg={2} xl={2} align='center' justify='center'>
                          
                               <Link to={`/patient/${e.id}`}>
-                                <button style={{marginTop:'20px'}}>
+                                <button className="butons" style={{marginTop:'20px'}}>
                                 <div className="left"></div>
 
                                   Full Info
@@ -165,11 +179,27 @@ const PatientList = () => {
                   </Grid>
                 </div>
               </Grid>
-            </>
           ))}
       </Grid>
+          <BasicPagination/>
     </Fragment>
   );
 };
 
 export default PatientList;
+
+
+
+
+export  function BasicPagination() {
+  return (
+    <>
+    
+      <Pagination count={10} color="secondary" />
+    </>
+  );
+}
+
+
+
+

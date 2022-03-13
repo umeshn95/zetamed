@@ -2,6 +2,8 @@ import { React, useEffect, Fragment, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { patientAction } from '../../Actions/PatientAction'
 import Loader from '../Loading/Loader';
+import Grid from "@mui/material/Grid";
+
 
 const PatientInfo = ( {match} ) => {
     const id = match.params.id
@@ -31,6 +33,42 @@ const PatientInfo = ( {match} ) => {
     }
     return (
         <Fragment>
+            <Grid container>
+                <Grid item xs={6} sm={6} md={6} lg={2.4} xl={2.4} >
+                    Overview
+                </Grid>
+                <Grid item xs={6} sm={6} md={6} lg={2.4} xl={2.4} >
+                    Appointment
+                </Grid>
+                <Grid item xs={6} sm={6} md={6} lg={2.4} xl={2.4} >
+                    Treatment
+                </Grid>
+                <Grid item xs={6} sm={6} md={6} lg={2.4} xl={2.4} >
+                    Prescription
+                </Grid>
+                <Grid item xs={6} sm={6} md={6} lg={2.4} xl={2.4} >
+                    Clinical Notes
+                </Grid>
+               
+            </Grid>
+            <Grid container>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
+                    Overview
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
+                    Appointment
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
+                    Treatment
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
+                    Prescription
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
+                    Clinical Notes
+                </Grid>
+               
+            </Grid>
             <div>PatientList</div>
             {
                 data && data.map((e, i) =>
