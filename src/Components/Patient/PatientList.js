@@ -1,4 +1,4 @@
-import { React, useEffect, Fragment } from "react";
+import { React, useEffect, Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { patientAction } from "../../Actions/PatientAction";
 import { Link } from "react-router-dom";
@@ -14,21 +14,59 @@ const PatientList = () => {
   const { patient, loading } = useSelector((state) => state.patient);
   const dispatch = useDispatch();
 
+  const [currentPage, setCurrentPage] = useState("1");
+  const [dataFilter, setDataFilter] = useState("");
+
+  const setCurrentPageNo = (event, value) => {
+    setCurrentPage(value);
+    dispatch(patientAction(value, dataFilter))
+};
+
+const filterPatientFunc = () => {
+  if (dataFilter){
+    dispatch(patientAction("1", dataFilter))
+  }
+  
+}
+
   let result = formatDistanceToNow(
     new Date(2016, 0, 1)
    
   ) 
- 
 
+  const onKeyPress = (e) => {
+    e.preventDefault()
+    if (dataFilter || dataFilter === ""){ 
+    dispatch(patientAction("1", dataFilter))
+    }
+  }
+ 
+  const imgReturnFunc = (index) => {
+    if(patient && patient.images && patient.images){
+      return patient && patient.images && patient.images[index]
+    }
+  }
+
+  const allPatientFunction = () => {
+    if(dataFilter === "" || currentPage !== "1"){
+      setDataFilter("")
+      setCurrentPage("1")
+      dispatch(patientAction("1", ""));
+    }
+    
+  }
 
   useEffect(() => {
     if (patient && patient.length === 0) {
-      dispatch(patientAction());
+      dispatch(patientAction(currentPage, dataFilter));
+    } else{
+      if (sessionStorage.getItem("petientSignal") === "1"){
+        dispatch(patientAction(currentPage, dataFilter));
+        sessionStorage.removeItem("petientSignal")
+      }
     }
-  
-    
+  }, [dispatch, patient, currentPage, dataFilter]);
 
-  }, [dispatch, patient]);
 
 
   if (loading) {
@@ -54,17 +92,25 @@ const PatientList = () => {
           <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
             <Grid container justify="center">
               <Grid item xs={8} sm={9} md={11} lg={11} xl={11}>
+              <form onSubmit={onKeyPress}>
                 <input
                   type="text"
                   className="zetamed_main_otp_actualinput"
                   placeholder="Type Patient Name or Email Or Mobile No.."
-                ></input>
+                  value={dataFilter}
+                  onChange={(e) => setDataFilter(e.target.value)}
+                />
+                </form>
               </Grid>
+              
               <Grid item xs={4} sm={3} md={1} lg={1} xl={1} align="right">
-                <button className="zetamed_patientlist_searchpatient">
+              <button  onClick={() => allPatientFunction()}>
+                  All Patient
+                </button><button className="zetamed_patientlist_searchpatient" onClick={() => filterPatientFunc()}>
                   Search
                 </button>
               </Grid>
+              
             </Grid>
           </Grid>
         </div>
@@ -84,7 +130,7 @@ const PatientList = () => {
                 }}
               >
                        
-          <div className="small_text">Number of Patients: <span className="bold">3</span></div>
+          <div className="small_text">Number of Patients: <span className="bold">{patient && patient.patientCount}</span></div>
         </Grid>
         <Grid
                     container
@@ -138,8 +184,8 @@ const PatientList = () => {
                               <div>
                                 <img
                                   style={{ height: "60px" }}
-                                  src={`${process.env.REACT_APP_BACKEND_URL}${e.patientImage}`}
-                                  alt="avatar"
+                                  src={`${process.env.REACT_APP_BACKEND_URL}/media/${imgReturnFunc(i)}`}
+                                  alt="patient Images"
                                 ></img>
                               </div>
                             </Grid>
@@ -165,14 +211,8 @@ const PatientList = () => {
                                   <div className="right"></div>
 
                             </button>
-                            
-
-                                
                               </Link>
                               
-                          
-                               
-                           
                         </Grid>
                       </Grid>
                     </Grid>
@@ -181,24 +221,12 @@ const PatientList = () => {
               </Grid>
           ))}
       </Grid>
-          <BasicPagination/>
+      <Pagination count={patient && patient.pages} color="secondary" page={patient && patient.page} onChange={setCurrentPageNo} />
     </Fragment>
   );
 };
 
 export default PatientList;
-
-
-
-
-export  function BasicPagination() {
-  return (
-    <>
-    
-      <Pagination count={10} color="secondary" />
-    </>
-  );
-}
 
 
 
