@@ -14,6 +14,7 @@ import Profile from './Components/Authentication/Profile';
 // Patient
 import PatientList from './Components/Patient/PatientList';
 import PatientInfo from './Components/Patient/PatientInfo';
+import Loader from './Components/Loading/Loader';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/password-reset-email" component={ResetPasswordEmail} />
         <Route exact path="/password-reset/:token" component={ResetPassword} />
+        <Route exact path="/loader" component={Loader} />
         <Prodected exact path="/password-change" component={PasswordChange} />
         <Prodected exact path="/profile" component={Profile} />
         <Prodected exact path="/profile-change" component={ProfileChange} />
