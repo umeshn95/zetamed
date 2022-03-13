@@ -40,9 +40,8 @@ const Profile = () => {
       {profile &&
         profile.data &&
         profile.data.map((e) => (
-          <div>
-
-            <Grid container>
+          <div key={e.id}>
+            <Grid container >
               <Grid item xs={12} sm={12} md={5} lg={5} xl={5} align='center' >
                 <img
                   style={{ height: "250px", width: '250px', borderRadius: '50%' }}

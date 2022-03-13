@@ -49,9 +49,9 @@ const PatientInfo = ( {match} ) => {
                         <h1>zipcode : {e.zipcode}</h1>
                         <h1>problemDescription : {e.problemDescription}</h1>
                         <h1>Registration Date : {e.createAt}</h1>
-                        <img
-                            src={`${process.env.REACT_APP_BACKEND_URL}${e.patientImage}`}
-                            alt="Patient Img"
+                        <img 
+                        src={`${process.env.REACT_APP_BACKEND_URL}${e.patientImage}`}
+                        alt="Patient Img"
                         />
                         <br />
                     </div>
