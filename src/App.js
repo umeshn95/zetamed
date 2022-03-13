@@ -1,10 +1,13 @@
 import Registration from './Components/Authentication/Registration'
 import Prodected from './Components/Routers/Prodected'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Login from './Components/Authentication/Login';
+import 'react-calendar/dist/Calendar.css';
+
+
 
 // Authentications
 import Otp from './Components/Authentication/Otp';
+import Login from './Components/Authentication/Login';
 import ResetPasswordEmail from './Components/Authentication/ResetPasswordEmail';
 import ResetPassword from './Components/Authentication/ResetPassword';
 import PasswordChange from './Components/Authentication/PasswordChange';
@@ -15,6 +18,8 @@ import Profile from './Components/Authentication/Profile';
 import PatientList from './Components/Patient/PatientList';
 import PatientInfo from './Components/Patient/PatientInfo';
 import AddPatient from './Components/Patient/AddPatient';
+
+import Calender  from './Components/CommandComponent/Calender'
 
 function App() {
   return (
@@ -36,6 +41,7 @@ function App() {
        <Prodected exact path="/patient" component={PatientList} />
        <Prodected exact path="/patient/:id" component={PatientInfo} />
        <Prodected exact path="/add-patient" component={AddPatient} />
+       <Prodected exact path="/calender" component={Calender} />
 
       </Switch>
       {/* <Footer /> */}

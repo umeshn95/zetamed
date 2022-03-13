@@ -44,7 +44,7 @@ export const PatientGroupReducer = createReducer(initialStatePatientGroup, {
     },
 
     [SUCCESS_PATIENT_GROUP]: (state, action) => {
-        state.patientGroup = action.payload
+        state.patientGroup = action.payload.data
         state.loading = false
     },
 
