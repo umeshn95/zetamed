@@ -4,7 +4,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import 'react-calendar/dist/Calendar.css';
 
 
-
 // Authentications
 import Otp from './Components/Authentication/Otp';
 import Login from './Components/Authentication/Login';
@@ -18,9 +17,14 @@ import Profile from './Components/Authentication/Profile';
 import PatientList from './Components/Patient/PatientList';
 import PatientInfo from './Components/Patient/PatientInfo';
 import AddPatient from './Components/Patient/AddPatient';
+import UpdatePatient from './Components/Patient/UpdatePatient';
 
-import Calender  from './Components/CommandComponent/Calender'
-import Loader from './Components/Loading/Loader';
+
+
+import SelfTest from './Components/SelfTest';
+import PatientGroup from './Components/Patient/PatientGroup';
+import PatientGroupInfo from './Components/Patient/PatientGroupInfo';
+import UpdatePatientGroup from './Components/Patient/UpdatePatientGroup';
 
 
 function App() {
@@ -35,7 +39,6 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/password-reset-email" component={ResetPasswordEmail} />
         <Route exact path="/password-reset/:token" component={ResetPassword} />
-        <Route exact path="/loader" component={Loader} />
         <Prodected exact path="/password-change" component={PasswordChange} />
         <Prodected exact path="/profile" component={Profile} />
         <Prodected exact path="/profile-change" component={ProfileChange} />
@@ -43,8 +46,23 @@ function App() {
        {/*Patients  */}
        <Prodected exact path="/patient" component={PatientList} />
        <Prodected exact path="/patient/:id" component={PatientInfo} />
+       <Prodected exact path="/update-patient/:id" component={UpdatePatient} />
        <Prodected exact path="/add-patient" component={AddPatient} />
-       <Prodected exact path="/calender" component={Calender} />
+
+       {/*Patients  Group*/}
+       <Prodected exact path="/patient-group" component={PatientGroup} />
+       <Prodected exact path="/patient-group/:id" component={PatientGroupInfo} />
+       <Prodected exact path="/patient-group-update/:id" component={UpdatePatientGroup} />
+
+
+
+
+
+
+
+
+
+       <Prodected exact path="/self" component={SelfTest} />
 
       </Switch>
       {/* <Footer /> */}
