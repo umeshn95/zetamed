@@ -16,13 +16,19 @@ const PatientInfo = ( {match} ) => {
     const [cusLoading, setCusLoading] = useState(false)
 
         useEffect(() => {
-            if(patientSingle && patientSingle.length === 0){
+            if(sessionStorage.getItem("petientSingleSignal") === "2" || sessionStorage.getItem("petientSingleSignal") === "3"){
                 dispatch(PatienSingleAction(match.params.id))
+                sessionStorage.removeItem("petientSingleSignal")
             } else{
-                if(patientSingle && patientSingle.data[0].id !== match.params.id){
+                if(patientSingle && patientSingle.length === 0){
                     dispatch(PatienSingleAction(match.params.id))
+                } else{
+                    if(patientSingle && patientSingle.data[0].id !== match.params.id){
+                        dispatch(PatienSingleAction(match.params.id))
+                    }
                 }
             }
+            
     }, [dispatch, patientSingle, match.params.id])
 
     const deletePatient = (id) => {
@@ -32,7 +38,8 @@ const PatientInfo = ( {match} ) => {
         axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/patient/get-patient/${id}/`, config)
         .then((response) => {
             if (response.data.status === 200){
-                console.log(response)
+                sessionStorage.setItem("petientSignal", "3")
+                sessionStorage.setItem("petientSingleSignal", "3")
                 alert.success(response.data.details)
                     history.push('/patient')
                 }else{
@@ -116,6 +123,8 @@ const PatientInfo = ( {match} ) => {
                             <button><Link  to={`/update-patient/${patientSingle && patientSingle.data[0].id}`}>Update patient</Link></button>
                         <br />
                         <button onClick={() => deletePatient(patientSingle && patientSingle.data[0].id)}>Delete Patient</button>
+                        <br />
+                        <button><Link  to={`/patient-group/${patientSingle && patientSingle.patientGroupId}`}>patient Group</Link></button>
                         </div>
                     </div>
                 )

@@ -1,7 +1,7 @@
 import { Fragment, React, useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux'
-import { patientGroupAction } from "../../Actions/PatientAction";
+import { patientAction, patientGroupAction } from "../../Actions/PatientAction";
 import { countryAction } from "../../Actions/MicroApiAction";
 import Calendar from 'react-calendar';
 import { useAlert } from "react-alert";
@@ -12,6 +12,7 @@ const UpdatePatient = ({ match }) => {
     const alert = useAlert();
     const userInfo = JSON.parse(localStorage.getItem("user-details"));
     const { loading, patientSingle } = useSelector((state) => state.patientSingle)
+    const { patient } = useSelector((state) => state.patient);
     const dispatch = useDispatch()
     const { allCountry } = useSelector((state) => state.allCountry)
     const { patientGroup } = useSelector((state) => state.patientGroup)
@@ -70,10 +71,10 @@ const UpdatePatient = ({ match }) => {
             };
             const { data } = await axios.put(
                 `${process.env.REACT_APP_BACKEND_URL}/api/patient/get-patient/${match.params.id}/`, myForm, config);
-            console.log(data)
             if (data.status === 201) {
                 alert.success(data.details)
-                sessionStorage.setItem("petientSignal", "1")
+                sessionStorage.setItem("petientSignal", "2")
+                sessionStorage.setItem("petientSingleSignal", "2")
             } else {
                 alert.error(data.details)
             }
@@ -106,6 +107,9 @@ const UpdatePatient = ({ match }) => {
     };
 
     useEffect(() => {
+        if (patient && patient.length === 0) {
+            dispatch(patientAction(sessionStorage.getItem("page"), sessionStorage.getItem("query")));
+          }
         if (allCountry && allCountry.length === 0) {
             dispatch(countryAction())
         }
@@ -134,7 +138,7 @@ const UpdatePatient = ({ match }) => {
         setPatientGroupp(loading === false ? patientSingle && patientSingle.patientGroupId : "")
         setProblemDescription(loading === false ? patientSingle && patientSingle.data[0].problemDescription : "")
 
-    }, [dispatch, loading, allCountry, patientGroup, patientSingle, match.params.id])
+    }, [dispatch, loading, allCountry, patientGroup, patientSingle, match.params.id, patient])
 
 
     if (loading || cusLoading) {

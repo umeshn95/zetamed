@@ -63,7 +63,18 @@ const filterPatientFunc = () => {
       if (sessionStorage.getItem("petientSignal") === "1"){
         dispatch(patientAction(currentPage, dataFilter));
         sessionStorage.removeItem("petientSignal")
+      } else{
+        if(sessionStorage.getItem("petientSignal") === "2" || sessionStorage.getItem("petientSignal") === "3"){
+          dispatch(patientAction(sessionStorage.getItem("page"), sessionStorage.getItem("query")));
+          sessionStorage.removeItem("page")
+          sessionStorage.removeItem("query")
+          sessionStorage.removeItem("petientSignal")
+        }
       }
+    }
+    if (patient && patient.length !== 0){
+      sessionStorage.setItem("query", patient && patient.query)
+      sessionStorage.setItem("page", patient && patient.page)
     }
   }, [dispatch, patient, currentPage, dataFilter]);
 

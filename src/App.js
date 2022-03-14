@@ -22,6 +22,9 @@ import UpdatePatient from './Components/Patient/UpdatePatient';
 
 
 import SelfTest from './Components/SelfTest';
+import PatientGroup from './Components/Patient/PatientGroup';
+import PatientGroupInfo from './Components/Patient/PatientGroupInfo';
+import UpdatePatientGroup from './Components/Patient/UpdatePatientGroup';
 
 
 function App() {
@@ -45,6 +48,19 @@ function App() {
        <Prodected exact path="/patient/:id" component={PatientInfo} />
        <Prodected exact path="/update-patient/:id" component={UpdatePatient} />
        <Prodected exact path="/add-patient" component={AddPatient} />
+
+       {/*Patients  Group*/}
+       <Prodected exact path="/patient-group" component={PatientGroup} />
+       <Prodected exact path="/patient-group/:id" component={PatientGroupInfo} />
+       <Prodected exact path="/patient-group-update/:id" component={UpdatePatientGroup} />
+
+
+
+
+
+
+
+
 
        <Prodected exact path="/self" component={SelfTest} />
 
