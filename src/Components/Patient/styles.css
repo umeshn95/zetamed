@@ -194,3 +194,35 @@
   font-weight: 700;
 
 }
+
+
+/* add patient patient entry */
+.zetamed_add_patient_patirnt_entry{
+color: white;
+font-family: 'Public Sans', sans-serif;
+padding: 8px;
+}
+
+.zetamed_add_patient_new_patient{
+font-family: 'Public Sans', sans-serif;
+
+}
+
+.zetamed_add_patient_basic_information{
+font-family: 'Public Sans', sans-serif;
+font-size: 26px;
+}
+
+.zetamed_add_patient_name{
+  align-self: center;
+  justify-self: center;
+  font-family: 'Public Sans', sans-serif;
+margin-top: 10px;
+}
+.zetamed_add_patient_date_of_birth{
+  background: url(https://img.icons8.com/color/48/000000/planner.png) no-repeat;
+  cursor:pointer;
+  border: none;
+  width: 47px;
+}
+
