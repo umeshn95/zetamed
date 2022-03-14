@@ -71,6 +71,7 @@ const Login = () => {
             {/* full name */}
 
             <Grid container style={{ padding: "50px" }} spacing={1.5}>
+            
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className="zetamed_main_otp_inputname">Email</div>
               </Grid>
