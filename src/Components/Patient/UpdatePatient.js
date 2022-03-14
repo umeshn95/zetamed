@@ -39,7 +39,7 @@ const UpdatePatient = ({ match }) => {
 
     const [cusLoading, setCusLoading] = useState(false);
 
-    const addPatientFunc = async (e) => {
+    const updatePatientFunc = async (e) => {
         e.preventDefault();
         setCusLoading(true)
         if (age) {
@@ -154,7 +154,7 @@ const UpdatePatient = ({ match }) => {
             <div>
                 <form
                     encType="multipart/form-data"
-                    onSubmit={addPatientFunc}
+                    onSubmit={updatePatientFunc}
                 >
                     <input
                         type="text"
