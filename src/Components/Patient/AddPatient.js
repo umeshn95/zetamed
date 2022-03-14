@@ -35,95 +35,94 @@ const AddPatient = () => {
   const [patientGroupp, setPatientGroupp] = useState("");
   const [calenderTrueFalse, setCalenderTrueFalse] = useState(false);
 
-  // const [cusLoading, setCusLoading] = useState(false);
 
-  const addPatientFunc = async (e) => {
-    e.preventDefault();
-    const myForm = new FormData();
-    myForm.set("name", name);
-    myForm.set("age", age);
-    myForm.set("gender", gender);
-    myForm.set("whichProof", whichProof);
-    myForm.set("proofId", proofId);
-    myForm.set("mobileNo", mobileNo);
-    myForm.set("email", email);
-    myForm.set("city", city);
-    myForm.set("state", state);
-    myForm.set("country", country);
-    myForm.set("zipcode", zipcode);
-    myForm.set("problem", problem);
-    myForm.set("problemDescription", problemDescription);
-    let patientGroup = patientGroupp;
-    myForm.set("patientGroup", patientGroup);
-    let patientImage = selectedImage;
-    myForm.set("patientImage", patientImage);
+    const addPatientFunc = async (e) => {
+        e.preventDefault();
+        if(age){
+            const myForm = new FormData();
+            myForm.set("name", name);
+            myForm.set("age", age);
+            myForm.set("gender", gender);
+            myForm.set("whichProof", whichProof);
+            myForm.set("proofId", proofId);
+            myForm.set("mobileNo", mobileNo);
+            myForm.set("email", email);
+            myForm.set("city", city);
+            myForm.set("state", state);
+            myForm.set("country", country);
+            myForm.set("zipcode", zipcode);
+            myForm.set("problem", problem);
+            myForm.set("problemDescription", problemDescription);
+            let patientGroup = patientGroupp
+            myForm.set("patientGroup", patientGroup)
+            let patientImage = selectedImage;
+            myForm.set("patientImage", patientImage);
+    
+    
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${userInfo && userInfo.access}`,
+                },
+            };
+            const { data } = await axios.post(
+                `${process.env.REACT_APP_BACKEND_URL}/api/patient/get-patient/`, myForm, config);
+            if (data.status === 201) {
+                alert.success(data.details)
+                setName("")
+                setAge("")
+                setGender("")
+                setWhichProof("")
+                setProofId("")
+                setMobileNo("")
+                setEmail("")
+                setCity("")
+                setState("")
+                setCountry("")
+                setZipcode("")
+                setProblem("")
+                setProblemDescription("")
+                setPatientGroupp("")
+                setSelectedImage("")
+                setLetestImg("")
+                sessionStorage.setItem("petientSignal", "1")
+            } else {
+                alert.error(data.details)
+            }
+        }else{
+            alert.error("Please Select D.O.B")
+        }
 
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${userInfo && userInfo.access}`,
-      },
-    };
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/patient/get-patient/`,
-      myForm,
-      config
-    );
-    if (data.status === 201) {
-      alert.success(data.details);
-      setName("");
-      setAge("");
-      setGender("");
-      setWhichProof("");
-      setProofId("");
-      setMobileNo("");
-      setEmail("");
-      setCity("");
-      setState("");
-      setCountry("");
-      setZipcode("");
-      setProblem("");
-      setProblemDescription("");
-      setPatientGroupp("");
-      setSelectedImage("");
-      setLetestImg("");
-    } else {
-      alert.error(data.details);
     }
   };
 
-  const onDateChange = (newDate) => {
-    let dateArray = new Date(newDate).toLocaleDateString().split("/");
-    setAge(
-      String(
-        `${Number(dateArray[2])}-${Number(dateArray[0])}-${Number(
-          dateArray[1]
-        )}`
-      )
-    );
-    setCalenderTrueFalse(false);
-  };
-  const updateProfileDataChange = (e) => {
+
+ const onDateChange = (newDate) => {
+    let dateArray = new Date(newDate).toLocaleDateString().split("/")
+    setAge(String(`${Number(dateArray[2])}-${Number(dateArray[0])}-${Number(dateArray[1])}`))
+    setCalenderTrueFalse(false)
+}
+const updateProfileDataChange = (e) => {
     const reader = new FileReader();
     reader.onload = () => {
-      if (reader.readyState === 2) {
-        setLetestImg(reader.result);
-        setSelectedImage(e.target.files[0]);
-      }
+        if (reader.readyState === 2) {
+            setLetestImg(reader.result);
+            setSelectedImage(e.target.files[0]);
+        }
     };
     reader.readAsDataURL(e.target.files[0]);
-  };
+};
 
-  useEffect(() => {
+useEffect(() => {
     if (allCountry && allCountry.length === 0) {
-      dispatch(countryAction());
+        dispatch(countryAction())
     }
     if (patientGroup && patientGroup.length === 0) {
-      dispatch(patientGroupAction());
+        dispatch(patientGroupAction())
     }
-  }, [dispatch, allCountry, patientGroup]);
+}, [dispatch, allCountry, patientGroup, ])
 
-  let cityArray = [];
+let cityArray = []
   return (
     <Fragment>
       <Grid container>
@@ -238,6 +237,7 @@ const AddPatient = () => {
               </Grid>
 
                           {/*date of birth  */}
+
 
                           <Grid
                 item
@@ -814,6 +814,7 @@ const AddPatient = () => {
                             </button>
                       </Grid>
 
+
          
             
 
@@ -824,6 +825,7 @@ const AddPatient = () => {
 
         
       </Grid>
+
 
     </Fragment>
   );

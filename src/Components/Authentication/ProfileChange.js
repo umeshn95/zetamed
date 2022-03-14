@@ -134,7 +134,7 @@ const ProfileChange = () => {
                       profile.data[0].profileImage
                       }`
                   }
-                  alt="Avatar Preview"
+                  alt="Profile images"
                 />
                 <br />
                 <input

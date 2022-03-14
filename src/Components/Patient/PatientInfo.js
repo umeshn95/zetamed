@@ -1,32 +1,57 @@
 import { React, useEffect, Fragment, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { patientAction } from '../../Actions/PatientAction'
 import Loader from '../Loading/Loader';
 import Grid from "@mui/material/Grid";
+import { useDispatch, useSelector } from 'react-redux'
+import { PatienSingleAction } from '../../Actions/PatientAction';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { useAlert } from "react-alert";
 
 
 const PatientInfo = ( {match} ) => {
-    const id = match.params.id
-    const { patient, loading } = useSelector((state) => state.patient);
+    const alert = useAlert()
     const dispatch = useDispatch()
-    const [data, setData] = useState()
+    const history = useHistory()
+    const { loading, patientSingle } = useSelector((state) => state.patientSingle)
+    const [cusLoading, setCusLoading] = useState(false)
 
-    useEffect(() => {
-        if (patient && patient.length === 0) {
-            dispatch(patientAction())
-        }
-        const filterData = () => {
-            if (patient && patient.length !== 0) {
+        useEffect(() => {
+            if(sessionStorage.getItem("petientSingleSignal") === "2" || sessionStorage.getItem("petientSingleSignal") === "3"){
+                dispatch(PatienSingleAction(match.params.id))
+                sessionStorage.removeItem("petientSingleSignal")
+            } else{
+                if(patientSingle && patientSingle.length === 0){
+                    dispatch(PatienSingleAction(match.params.id))
+                } else{
+                    if(patientSingle && patientSingle.data[0].id !== match.params.id){
+                        dispatch(PatienSingleAction(match.params.id))
+                    }
+                }
             }
-            setData(patient && patient.data && patient.data.filter((e) => e.id === id));
-        }
-        filterData()
-        
-    }, [dispatch, patient, id])
+            
+    }, [dispatch, patientSingle, match.params.id])
 
-    console.log(data)
-    
-    if (loading) {
+    const deletePatient = (id) => {
+        setCusLoading(true)
+        const userInfo = JSON.parse(localStorage.getItem('user-details'))
+        const config = { headers: { 'Authorization': `Bearer ${userInfo && userInfo.token}` } }
+        axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/patient/get-patient/${id}/`, config)
+        .then((response) => {
+            if (response.data.status === 200){
+                sessionStorage.setItem("petientSignal", "3")
+                sessionStorage.setItem("petientSingleSignal", "3")
+                alert.success(response.data.details)
+                    history.push('/patient')
+                }else{
+                    alert.error(response.data.details)
+                }
+        })
+        setCusLoading(false)
+            
+    }
+
+
+    if (loading || cusLoading) {
         return (
             <Loader />
         )
@@ -70,8 +95,9 @@ const PatientInfo = ( {match} ) => {
                
             </Grid>
             <div>PatientList</div>
+
             {
-                data && data.map((e, i) =>
+                loading === false && patientSingle && patientSingle.data.map((e, i) =>
                     <div key={i}>
                         <h1>D.O.B : {e.age}</h1>
                         <h1>Patient Name : {e.name}</h1>
@@ -85,6 +111,7 @@ const PatientInfo = ( {match} ) => {
                         <h1>state : {e.state}</h1>
                         <h1>country : {e.country}</h1>
                         <h1>zipcode : {e.zipcode}</h1>
+                        <h1>Patient Group Name : {patientSingle && patientSingle.patientGroup}</h1>
                         <h1>problemDescription : {e.problemDescription}</h1>
                         <h1>Registration Date : {e.createAt}</h1>
                         <img 
@@ -92,6 +119,13 @@ const PatientInfo = ( {match} ) => {
                         alt="Patient Img"
                         />
                         <br />
+                        <div>
+                            <button><Link  to={`/update-patient/${patientSingle && patientSingle.data[0].id}`}>Update patient</Link></button>
+                        <br />
+                        <button onClick={() => deletePatient(patientSingle && patientSingle.data[0].id)}>Delete Patient</button>
+                        <br />
+                        <button><Link  to={`/patient-group/${patientSingle && patientSingle.patientGroupId}`}>patient Group</Link></button>
+                        </div>
                     </div>
                 )
             }
@@ -101,3 +135,16 @@ const PatientInfo = ( {match} ) => {
 }
 
 export default PatientInfo
+
+// useEffect(() => {
+//     if (patient && patient.length === 0) {
+//         dispatch(patientAction())
+//     }
+//     const filterData = () => {
+//         if (patient && patient.length !== 0) {
+//         }
+//         setData(patient && patient.data && patient.data.filter((e) => e.id === id));
+//     }
+//     filterData()
+    
+// }, [dispatch, patient, id])
