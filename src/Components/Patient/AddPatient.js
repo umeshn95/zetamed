@@ -94,7 +94,7 @@ const AddPatient = () => {
         }
 
     }
-  };
+  
 
 
  const onDateChange = (newDate) => {
@@ -803,7 +803,7 @@ let cityArray = []
 
 
                       </Grid>
-                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center' justify='center' style={{backgroundColor:"rgb(229, 229, 229)",height:"60px"}}>
+                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center' justify='center'>
                       
                       <button className="butons" type="submit" style={{marginTop:'7px',width:'40%'}}>
                                 <div className="left"></div>
