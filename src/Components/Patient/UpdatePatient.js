@@ -41,7 +41,7 @@ const UpdatePatient = ({ match }) => {
 
     const [cusLoading, setCusLoading] = useState(false);
 
-    const addPatientFunc = async (e) => {
+    const updatePatientFunc = async (e) => {
         e.preventDefault();
         setCusLoading(true)
         if (age) {
@@ -152,6 +152,14 @@ const UpdatePatient = ({ match }) => {
     let cityArray = []
     return (
         <Fragment>
+// <<<<<<< vishesh
+//             <div>Update Patient</div>
+//             <div>
+//                 <form
+//                     encType="multipart/form-data"
+//                     onSubmit={updatePatientFunc}
+//                 >
+// =======
 
 
 {/* update patient */}
