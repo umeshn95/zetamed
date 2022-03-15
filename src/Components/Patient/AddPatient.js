@@ -94,7 +94,7 @@ const AddPatient = () => {
         }
 
     }
-  };
+  
 
 
  const onDateChange = (newDate) => {

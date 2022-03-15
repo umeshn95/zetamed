@@ -7,6 +7,8 @@ import Calendar from 'react-calendar';
 import { useAlert } from "react-alert";
 import { PatienSingleAction } from '../../Actions/PatientAction';
 import Loader from "../Loading/Loader";
+import Grid from "@mui/material/Grid";
+
 
 const UpdatePatient = ({ match }) => {
     const alert = useAlert();
@@ -150,212 +152,733 @@ const UpdatePatient = ({ match }) => {
     let cityArray = []
     return (
         <Fragment>
-            <div>Update Patient</div>
-            <div>
-                <form
-                    encType="multipart/form-data"
-                    onSubmit={addPatientFunc}
-                >
+
+
+{/* update patient */}
+
+
+<Grid container>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <div className="zetamed_add_patient_new_patient">
+            Add New Patient..
+          </div>{" "}
+          <hr />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          style={{ backgroundColor: "hsl(210, 80%, 42%)" }}
+        >
+          <div className="zetamed_add_patient_patirnt_entry">
+            {" "}
+            <img
+              alt="avatar"
+              src="https://img.icons8.com/stickers/50/000000/user.png"
+            />{" "}
+            Patient Entry
+          </div>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <div className="zetamed_add_patient_basic_information">
+            {" "}
+            Basic Information <hr />
+          </div>
+        </Grid>
+        <Grid container>
+          <form
+            encType="multipart/form-data"
+            onSubmit={addPatientFunc}
+            style={{ width: "100%" }}
+          >
+            <Grid container spacing={2}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                lg={6}
+                xl={6}
+                style={{ display: "flex" }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">Name</div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
                     <input
-                        type="text"
+                      className="zetamed_main_otp_actualinput"
+                      type="text"
                         required
                         placeholder="Full Name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
-                    <br />
-                    <br />
-
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                lg={6}
+                xl={6}
+                style={{ display: "flex" }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">Gender</div>
+                  </Grid>
+                  <Grid item xs={9} sm={9} md={10} lg={8} xl={9}>
                     <select
-                        required
-                        value={gender}
-                        onChange={(e) => setGender(e.target.value)}
+                      className="zetamed_main_otp_actualinput"
+                      style={{ height: "40px" }}
+                      required
+                      value={gender}
+                      onChange={(e) => setGender(e.target.value)}
                     >
-                        <option value="Select">Select</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
+                      <option value="Select">Select</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
                     </select>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+                          {/*date of birth  */}
 
 
-                    <br />
+                          <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                lg={6}
+                xl={6}
+                style={{ display: "flex" }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                                      <div className="zetamed_add_patient_name"
+                                      >D.O.B</div>
+                  </Grid>
+                                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9} style={{display:'flex'}}>
+                                      <input
+                                        //   style={{display:calenderTrueFalse ? 'none' : ''}}
+                      className="zetamed_main_otp_actualinput"
+                      type="text"
+                      required
+                      placeholder="Enter Full Name......"
+                      value={age}
+                      onChange={(e) => setAge(e.target.value)}
+                    />
+                                      <button
+                                          className="zetamed_add_patient_date_of_birth"
+                                          style={{display:calenderTrueFalse ? 'none' : ''}}
+                                          
+          onClick={() => setCalenderTrueFalse(calenderTrueFalse ? false : true)}
+        >
+          
+        </button>
+        <div  >
+          {calenderTrueFalse ? (
+                                              <Calendar
+                                                 
+              onChange={onDateChange}
+              // value={age}
+              showNeighboringMonth={false}
+              locale={"en-US"}
+            />
+          ) : (
+            ""
+          )}
+        </div>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                lg={6}
+                xl={6}
+                style={{ display: "flex" }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">ID Proof</div>
+                  </Grid>
+                  <Grid item xs={9} sm={9} md={10} lg={8} xl={9.2}>
                     <select
-                        required
-                        value={whichProof}
-                        onChange={(e) => setWhichProof(e.target.value)}
+                      className="zetamed_main_otp_actualinput"
+                      style={{ height: "40px" }}
+                      required
+                      value={whichProof}
+                      onChange={(e) => setWhichProof(e.target.value)}
                     >
-                        <option value="Select">Select</option>
-                        <option value="Adhar">Adhar</option>
-                        <option value="Voter Id">Voter Id</option>
-                        <option value="Driving LCS">Driving LCS</option>
+                      <option value="Select">Select</option>
+                      <option value="Adhar">Adhaar</option>
+                      <option value="Voter Id">Voter Id</option>
+                      <option value="Driving LCS">Driving License</option>
                     </select>
-                    <br />
-                    <input
-                        required
-                        type="text"
-                        placeholder="Proof Id."
-                        value={proofId}
-                        onChange={(e) => setProofId(e.target.value)}
-                    />
-                    <br />
-                    <input
-                        required
-                        type="text"
-                        placeholder="Mobile No."
-                        value={mobileNo}
-                        onChange={(e) => setMobileNo(e.target.value)}
-                    />
-                    <br />
-                    <input
-                        required
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <br />
-                    <select
-                        required
-                        value={country}
-                        onChange={(e) => setCountry(e.target.value)}
-                    >
-                        <option value="">Country</option>
-                        {allCountry &&
-                            allCountry.map((e, i) => (
-                                <option key={i} value={e.country}>
-                                    {e.country}
-                                </option>
-                            ))}
-                    </select>
+                  </Grid>
+                </Grid>
+              </Grid>
 
-                    {country && (
-                        <div>
-                            <select
-                                required
-                                value={state}
-                                onChange={(e) => setState(e.target.value)}
-                            >
-                                <option value="">State</option>
-                                {allCountry &&
-                                    allCountry.filter(e => e.country === country).map((p) =>
-                                        p.state.map((s, i) =>
-                                            <option key={i} value={s.state}>
-                                                {s.state}
-                                            </option>
-                                        ))}
-                            </select>
-                        </div>
-                    )}
-
-                    {state && (
-                        <div>
-                            <select
-                                required
-                                value={city}
-                                onChange={(e) => setCity(e.target.value)}
-                            >
-                                <option value="">City</option>
-                                {console.log(allCountry &&
-                                    allCountry.filter(e => e.country === country && e.state.map(k => k.state === state ? k.city.map((s, i) =>
-                                        <div key={i}>
-                                            {cityArray.push(s.city)}
-                                        </div>
-
-                                    ) : ""))
-                                )}
-                                {
-                                    cityArray && cityArray.map((e, i) =>
-                                        <option key={i} value={e}>
-                                            {e}
-                                        </option>
-                                    )
-                                }
-                            </select>
-                        </div>
-                    )}
-
-                    <br />
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                lg={6}
+                xl={6}
+                style={{ display: "flex" }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">ID Number</div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
                     <input
-                        required
-                        type="text"
-                        placeholder="Zip Code"
-                        value={zipcode}
-                        onChange={(e) => setZipcode(e.target.value)}
+                      className="zetamed_main_otp_actualinput"
+                      required
+                      type="text"
+                      placeholder="ID Number"
+                      value={proofId}
+                      onChange={(e) => setProofId(e.target.value)}
                     />
-                    <br />
+                  </Grid>
+                </Grid>
+              </Grid>
+              {/* mobile number */}
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                lg={6}
+                xl={6}
+                style={{ display: "flex" }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">Mobile</div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
                     <input
-                        required
-                        type="text"
-                        placeholder="Problem"
-                        value={problem}
-                        onChange={(e) => setProblem(e.target.value)}
+                      className="zetamed_main_otp_actualinput"
+                      required
+                      type="text"
+                      placeholder="Mobile No."
+                      value={mobileNo}
+                      onChange={(e) => setMobileNo(e.target.value)}
                     />
-                    <br />
-                    <textarea
-                        required
-                        type="textarea"
-                        placeholder="Problem Discription"
-                        value={problemDescription}
-                        rows={4}
-                        cols={50}
-                        onChange={(e) => setProblemDescription(e.target.value)}
-                    />
-                    <br />
+                  </Grid>
+                </Grid>
+              </Grid>
+              {/* Email */}
 
-                    <select
-                        required
-                        value={patientGroupp}
-                        onChange={(e) => setPatientGroupp(e.target.value)}
-                    >
-                        <option value="">Patient Group</option>
-                        {patientGroup &&
-                            patientGroup.map((e, i) => (
-                                <option key={i} value={e.id}>
-                                    {e.disease}
-                                </option>
-                            ))}
-                    </select>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                lg={6}
+                xl={6}
+                style={{ display: "flex" }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">Email</div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
+                    <input
+                      className="zetamed_main_otp_actualinput"
+                      required
+                      type="email"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Grid>
+                </Grid>
+                          </Grid>
+                          {/* image upload start */}
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={6}
+                lg={6}
+                xl={6}
+                style={{ display: "flex" }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">Patient Image</div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
+                  <img
+              src={
+                imgSignal
+                    ? letestImg
+                    : `${process.env.REACT_APP_BACKEND_URL}${loading === false ? patientSingle && patientSingle.data[0].patientImage : ""
+                    }`
+            }
+              alt={letestImg ? "Patient Images" : ""}
+            />
+            <input
+              style={{
+                border: "5px solid #ccc",
+                display: "inline-block",
+                padding: "6px 12px",
+                cursor: "pointer",
+              }}
+              type="file"
+              name="Patient Images"
+              accept="image/*"
+              onChange={updateProfileDataChange}
+              placeholder="upload image"
+            />
+                  </Grid>
+                </Grid>
+                          </Grid>
+                          
+                          {/* image upload end */}
 
-                    <br />
-                    <img
-                        src={
-                            imgSignal
-                                ? letestImg
-                                : `${process.env.REACT_APP_BACKEND_URL}${loading === false ? patientSingle && patientSingle.data[0].patientImage : ""
-                                }`
-                        }
-                        alt="Profile images"
-                    />
-                    <input
-                        style={{ "border": "5px solid #ccc", "display": "inline-block", "padding": "6px 12px", "cursor": "pointer" }}
-                        type="file"
-                        name="Patient Images"
-                        accept="image/*"
-                        onChange={updateProfileDataChange}
-                        placeholder='upload image'
-                    />
-                    <input
-                        type="submit"
-                        value="Update Patient"
-                    />
-                </form>
-                <button onClick={() => setCalenderTrueFalse(calenderTrueFalse ? false : true)}>D.O.B</button>
-                <div>
-                    {
-                        calenderTrueFalse ? (
-                            <Calendar
-                                onChange={onDateChange}
-                                // value={age}
-                                showNeighboringMonth={false}
-                                locale={"en-US"}
-                            />
-                        ) :
-                            ""
-                    }
-                    <h1>D.O.B : {age}</h1>
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_add_patient_basic_information">
+                  Adress <hr />
                 </div>
-            </div>
-            <br />
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">Flat No.</div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
+                    <input
+                      className="zetamed_main_otp_actualinput"
+                      required
+                      type="email"
+                      placeholder="Flat no./Room No."
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">Street</div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
+                    <input
+                      className="zetamed_main_otp_actualinput"
+                      required
+                      type="email"
+                      placeholder="Street"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">Country</div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
+                    <select
+                      className="zetamed_main_otp_actualinput"
+                      style={{ height: "40px" }}
+                      required
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
+                    >
+                      <option value="">Select Country..</option>
+                      {allCountry &&
+                        allCountry.map((e, i) => (
+                          <option key={i} value={e.country}>
+                            {e.country}
+                          </option>
+                        ))}
+                    </select>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">State</div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
+                    <select
+                      className="zetamed_main_otp_actualinput"
+                      style={{ height: "40px" }}
+                      required
+                      value={state}
+                      onChange={(e) => setState(e.target.value)}
+                    >
+                      <option value="">Select State</option>
+                      {allCountry &&
+                        allCountry
+                          .filter((e) => e.country === country)
+                          .map((p) =>
+                            p.state.map((s) => (
+                              <option key={s.id} value={s.state}>
+                                {s.state}
+                              </option>
+                            ))
+                          )}
+                    </select>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              {/* select city */}
+              <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">City</div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
+                    <select
+                      className="zetamed_main_otp_actualinput"
+                      style={{ height: "40px" }}
+                      required
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    >
+                      <option value="">City</option>
+                      {console.log(
+                        allCountry &&
+                          allCountry.filter(
+                            (e) =>
+                              e.country === country &&
+                              e.state.map((k) =>
+                                k.state === state
+                                  ? k.city.map((s) => cityArray.push(s.city))
+                                  : ""
+                              )
+                          )
+                      )}
+                      {cityArray &&
+                        cityArray.map((e, i) => (
+                          <option key={i} value={e}>
+                            {e}
+                          </option>
+                        ))}
+                    </select>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              {/* zip code */}
+
+              <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">Zip Code</div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
+                    <input
+                      className="zetamed_main_otp_actualinput"
+                      required
+                      type="text"
+                      placeholder="Zip Code"
+                      value={zipcode}
+                      onChange={(e) => setZipcode(e.target.value)}
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              {/* medical information */}
+              <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+                <div className="zetamed_add_patient_basic_information">
+                  Medical Information <hr />
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">
+                      Medical History
+                    </div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
+                    <input
+                      className="zetamed_main_otp_actualinput"
+                      required
+                      type="text"
+                      placeholder="Problem"
+                      value={problem}
+                      onChange={(e) => setProblem(e.target.value)}
+                    />
+                  </Grid>
+                </Grid>
+                          </Grid>
+                          
+                          {/* problem description */}
+              <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={2}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">
+                      Problem Description
+                    </div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
+                    <textarea
+                      className="zetamed_main_otp_actualinput"
+                      style={{ height: "100px" }}
+                      required
+                      type="textarea"
+                      placeholder="Problem Discription"
+                      value={problemDescription}
+                      rows={4}
+                      cols={50}
+                      onChange={(e) => setProblemDescription(e.target.value)}
+                    />
+                  </Grid>
+                </Grid>
+                          </Grid>
+                          
+                          {/* add patient to certain group */}
+                        
+              <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                <Grid container>
+                  <Grid
+                    item
+                    xs={3}
+                    sm={3}
+                    md={2}
+                    lg={1}
+                    xl={1}
+                    align="center"
+                    justify="center"
+                  >
+                    <div className="zetamed_add_patient_name">
+                      Group
+                    </div>
+                  </Grid>
+                  <Grid item xs={8.5} sm={9} md={10} lg={8} xl={9}>
+                                      <select
+                                                className="zetamed_main_otp_actualinput"
+                                                style={{ height: "40px" }}
+              required
+              value={patientGroupp}
+              onChange={(e) => setPatientGroupp(e.target.value)}
+            >
+              <option value="">Patient Group</option>
+              {patientGroup &&
+                patientGroup.map((e, i) => (
+                  <option key={i} value={e.id}>
+                    {e.disease}
+                  </option>
+                ))}
+            </select>
+                  </Grid>
+                </Grid>
+                          </Grid>
+
+
+                      </Grid>
+                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12} align='center' justify='center'>
+                      
+                      <button className="butons" type="submit" style={{marginTop:'7px',width:'40%'}}>
+                                <div className="left"></div>
+
+                                  Update Patient Details
+                                  <div className="right"></div>
+
+                            </button>
+                      </Grid>
+
+
+         
+            
+
+           
+           
+          </form>
+        </Grid>
+
+        
+      </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </Fragment>
     )
 }

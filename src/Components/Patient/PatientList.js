@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Loader from "../Loading/Loader";
 import Grid from "@mui/material/Grid";
 
-import "./styles.css";
+import "./styles.scss";
 
 import Pagination from '@mui/material/Pagination';
 import { formatDistanceToNow } from "date-fns";
