@@ -194,3 +194,156 @@
   font-weight: 700;
 
 }
+
+
+/* add patient patient entry */
+.zetamed_add_patient_patirnt_entry{
+color: white;
+font-family: 'Public Sans', sans-serif;
+padding: 8px;
+}
+
+.zetamed_add_patient_new_patient{
+font-family: 'Public Sans', sans-serif;
+
+}
+
+.zetamed_add_patient_basic_information{
+font-family: 'Public Sans', sans-serif;
+font-size: 26px;
+}
+
+.zetamed_add_patient_name{
+  align-self: center;
+  justify-self: center;
+  font-family: 'Public Sans', sans-serif;
+margin-top: 10px;
+}
+.zetamed_add_patient_date_of_birth{
+  background: url(https://img.icons8.com/color/48/000000/planner.png) no-repeat;
+  cursor:pointer;
+  border: none;
+  width: 47px;
+}
+
+
+
+// button css
+
+:root{
+	--height: 100px;
+	--width: 200px;
+}
+
+
+
+
+.bwrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.bbutton{
+  font-family: 'Public Sans', sans-serif;
+
+	position: relative;
+  width: 100%;
+  height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	overflow: hidden;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.2), 0 3px 8px rgba(0,0,0,0.1);
+	transition: all 0.3s cubic-bezier(0, 0.22, .3, 1);
+	
+	&:before{
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0,0,0,0.1);
+	}
+
+	span{
+		color: #fff;
+		font-size: 1rem;
+		z-index: 10;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+	}
+
+	&._1{ background: #2980b9 }
+	&._2{	background: #8e44ad }
+	&._3{	background: #16a085 }
+	&._4{	background: #e74c3c }
+
+
+	.back{
+		position: absolute;
+		width: 0;
+		height: 0;
+		filter: url(#filter);
+		border-radius: 50%;
+		z-index: 5;
+		transition: all 2.5s cubic-bezier(0.1, 0.22, .3, 1);
+	}
+
+	&._1 .back{
+		left: -50%;
+		top: -50%;
+		background: #27ae60;
+	}
+	&._2 .back{
+		right: -50%;
+		top: -50%;
+		background: #c0392b;
+	}
+	&._3 .back{
+		left: -50%;
+		bottom: -50%;
+		background: #34495e;
+	}
+	&._4 .back{
+		right: -50%;
+		bottom: -50%;
+		background: #2980b9;
+	}
+
+	&:hover .back{
+		width: calc(2 * var(--width));
+		height: calc(2 * var(--height));
+	}
+}
+
+@media only screen and (max-width: 750px) {
+	.wrapper {
+		flex-direction: column;
+	}
+	.button{
+		margin: 0.8rem 0;
+	}
+}
+
+
+
+.support{
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	padding: 10px;
+	display: flex;
+}
+
+
+// fonts add patient
+
+
+.zetamed_add_patient_show_details{
+  font-family: 'Public Sans', sans-serif;
+  display: flex;
+  gap:10px;
+}
