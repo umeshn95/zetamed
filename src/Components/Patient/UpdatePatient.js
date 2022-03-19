@@ -152,14 +152,7 @@ const UpdatePatient = ({ match }) => {
     let cityArray = []
     return (
         <Fragment>
-// <<<<<<< vishesh
-//             <div>Update Patient</div>
-//             <div>
-//                 <form
-//                     encType="multipart/form-data"
-//                     onSubmit={updatePatientFunc}
-//                 >
-// =======
+
 
 
 {/* update patient */}
@@ -199,7 +192,7 @@ const UpdatePatient = ({ match }) => {
         <Grid container>
           <form
             encType="multipart/form-data"
-            onSubmit={addPatientFunc}
+            onSubmit={updatePatientFunc}
             style={{ width: "100%" }}
           >
             <Grid container spacing={2}>
@@ -892,3 +885,19 @@ const UpdatePatient = ({ match }) => {
 }
 
 export default UpdatePatient
+
+
+
+
+
+
+
+
+
+
+            // <div>Update Patient</div> 
+            // <div> 
+            //     <form 
+            //          encType="multipart/form-data" 
+            //         onSubmit={updatePatientFunc} 
+            //    > 
