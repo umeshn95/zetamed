@@ -89,7 +89,6 @@ const PatientGroup = () => {
                         </div>
                     )
                 }
-
             </div>
         </Fragment>
     )
