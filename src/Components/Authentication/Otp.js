@@ -197,44 +197,7 @@ const Otp = () => {
         <Grid>
         </Grid>
       </Grid>
-      {/* 
-      <div>
-        <div>
-          <input
-            type="number"
-            placeholder="Mobile No"
-            required
-            name="number"
-            value={mobile}
-            disabled={disMobile}
-            onChange={(e) => setMobile(e.target.value)}
-          />
-          <button className='zetamed_otp_verify_button_css' onClick={() => sendOtpRequest()}>Send Otp</button>
-        </div>
-
-        {otpInput ? (
-          <div>
-            <input
-              type="number"
-              placeholder="Enter OTP"
-              required
-              name="number"
-              value={otpNo}
-              disabled={disOtp}
-              onChange={(e) => setOtpNo(e.target.value)}
-            />
-            <button onClick={() => otpSubmit()}>Submit Otp</button>
-          </div>
-        ) : (
-          ""
-        )}
-        <h5>
-          if allready verify otp so <Link to="/registration">click here</Link>
-        </h5>
-        <h5>
-          if allready registration <Link to="/login">click here</Link>
-        </h5>
-      </div> */}
+      
     </>
   );
 };
