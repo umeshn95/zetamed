@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { RegistrationReducer, ProfileReducer } from './Reducers/AuthenticationReducers'
 import { 
-    PatientReducer, PatientGroupReducer, PatientSingleReducer 
+    PatientReducer, PatientGroupReducer, PatientSingleReducer,
+    PatientAppointmentReducer, PatientSearchReducer
 } from './Reducers/PatientReducers'
 import { countryReducer } from './Reducers/MicroApiReducers'
+import { AppointMentFormReducer } from './Reducers/ModelReducers'
 
 
 const Store = configureStore({
@@ -16,9 +18,14 @@ const Store = configureStore({
         patient : PatientReducer,
         patientGroup : PatientGroupReducer,
         patientSingle : PatientSingleReducer,
+        patientAppointment : PatientAppointmentReducer,
+        patientSearch : PatientSearchReducer,
 
         // Micro Api
-        allCountry : countryReducer
+        allCountry : countryReducer,
+
+        // model
+        showAppointment: AppointMentFormReducer,
     } 
 })
 

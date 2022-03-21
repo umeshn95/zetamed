@@ -14,6 +14,19 @@ import {
     REQUEST_PATIENT_SINGLE,
     SUCCESS_PATIENT_SINGLE,
     FAIL_PATIENT_SINGLE,
+
+    // Patien Appintment
+    REQUEST_PATIENT_APPOINTMENT,
+    SUCCESS_PATIENT_APPOINTMENT,
+    FAIL_PATIENT_APPOINTMENT,
+
+    // Patien Search
+    REQUEST_PATIENT_SEARCH,
+    SUCCESS_PATIENT_SEARCH,
+    FAIL_PATIENT_SEARCH,
+
+
+
 } from '../Constants/PatientConstants'
 
 
@@ -50,5 +63,26 @@ export const PatienSingleAction = (id) => async (dispatch) => {
         )
     } catch (error) {
         dispatch({ type: FAIL_PATIENT_SINGLE, payload: error.response.details })
+    }
+}
+
+
+export const patientAppointmentAction = (page, filter) => async (dispatch) => {
+    try {
+        dispatch({ type: REQUEST_PATIENT_APPOINTMENT })
+        let { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/patient/get-patient-appointment/?query=${filter}&page=${page}`, config)
+        dispatch({ type: SUCCESS_PATIENT_APPOINTMENT , payload: data })
+    } catch (error) {
+        dispatch({ type: FAIL_PATIENT_APPOINTMENT , payload: error.response.details })
+    }
+}
+
+export const patientSearchAction = () => async (dispatch) => {
+    try {
+        dispatch({ type: REQUEST_PATIENT_SEARCH })
+        let { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/patient/search-patient/`, config)
+        dispatch({ type: SUCCESS_PATIENT_SEARCH , payload: data })
+    } catch (error) {
+        dispatch({ type: FAIL_PATIENT_SEARCH , payload: error.response.details })
     }
 }

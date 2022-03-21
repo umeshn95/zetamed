@@ -14,6 +14,16 @@ import {
     REQUEST_PATIENT_SINGLE,
     SUCCESS_PATIENT_SINGLE,
     FAIL_PATIENT_SINGLE,
+
+    // Patien Appintment
+    REQUEST_PATIENT_APPOINTMENT,
+    SUCCESS_PATIENT_APPOINTMENT,
+    FAIL_PATIENT_APPOINTMENT,
+
+    // Patien Search
+    REQUEST_PATIENT_SEARCH,
+    SUCCESS_PATIENT_SEARCH,
+    FAIL_PATIENT_SEARCH,
 } from '../Constants/PatientConstants'
 
 
@@ -29,6 +39,15 @@ const initialStatePatientSingle = {
     patientSingle: []
 }
 
+const initialStatePatientAppointment = {
+    patientAppointment: []
+}
+
+const initialStatePatientSearch = {
+    patientSearch: []
+}
+
+// Patien list
 export const PatientReducer = createReducer(initialStatePatient, {
 
     [REQUEST_PATIENT]: (state) => {
@@ -47,6 +66,7 @@ export const PatientReducer = createReducer(initialStatePatient, {
 
 })
 
+// Patien group
 export const PatientGroupReducer = createReducer(initialStatePatientGroup, {
 
     [REQUEST_PATIENT_GROUP]: (state) => {
@@ -65,6 +85,7 @@ export const PatientGroupReducer = createReducer(initialStatePatientGroup, {
 
 })
 
+// Patien Single
 export const PatientSingleReducer = createReducer(initialStatePatientSingle, {
 
     [REQUEST_PATIENT_SINGLE]: (state) => {
@@ -77,6 +98,43 @@ export const PatientSingleReducer = createReducer(initialStatePatientSingle, {
     },
 
     [FAIL_PATIENT_SINGLE]: (state, action) => {
+        state.error = action.payload.data.details
+        state.loading = false
+    },
+})
+
+// Patien Appointment
+export const PatientAppointmentReducer = createReducer(initialStatePatientAppointment, {
+
+    [REQUEST_PATIENT_APPOINTMENT]: (state) => {
+        state.loading = true
+    },
+
+    [SUCCESS_PATIENT_APPOINTMENT]: (state, action) => {
+        state.patientAppointment = action.payload
+        state.loading = false
+    },
+
+    [FAIL_PATIENT_APPOINTMENT]: (state, action) => {
+        state.error = action.payload.data.details
+        state.loading = false
+    },
+
+}) 
+
+// Patien Appointment
+export const PatientSearchReducer = createReducer(initialStatePatientSearch, {
+
+    [REQUEST_PATIENT_SEARCH]: (state) => {
+        state.loading = true
+    },
+
+    [SUCCESS_PATIENT_SEARCH]: (state, action) => {
+        state.patientSearch = action.payload
+        state.loading = false
+    },
+
+    [FAIL_PATIENT_SEARCH]: (state, action) => {
         state.error = action.payload.data.details
         state.loading = false
     },

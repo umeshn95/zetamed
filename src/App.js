@@ -4,9 +4,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import 'react-calendar/dist/Calendar.css';
 
 
-import SelfTest from './Components/SelfTest';
-
-
 // Authentications
 import Otp from './Components/Authentication/Otp';
 import Login from './Components/Authentication/Login';
@@ -24,24 +21,27 @@ import UpdatePatient from './Components/Patient/UpdatePatient';
 
 
 
-
+import SelfTest from './Components/SelfTest';
 import PatientGroup from './Components/Patient/PatientGroup';
 import PatientGroupInfo from './Components/Patient/PatientGroupInfo';
 import UpdatePatientGroup from './Components/Patient/UpdatePatientGroup';
+import AppointmentCalender from './Components/Appointment/AppointmentCalender';
 
 
 function App() {
+
   return (
     <BrowserRouter>
       {/* <Header /> */}
       <Switch>
 
       {/* Authentications */}
-        <Route exact path="/otp-verify" component={Otp} />
-        <Route exact path="/registration" component={Registration} />
+        <Prodected exact path="/otp-verify" component={Otp} />
+        <Prodected exact path="/registration" component={Registration} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/password-reset-email" component={ResetPasswordEmail} />
         <Route exact path="/password-reset/:token" component={ResetPassword} />
+        <Route exact path="/appointment" component={AppointmentCalender} />
         <Prodected exact path="/password-change" component={PasswordChange} />
         <Prodected exact path="/profile" component={Profile} />
         <Prodected exact path="/profile-change" component={ProfileChange} />
@@ -58,7 +58,14 @@ function App() {
        <Prodected exact path="/patient-group-update/:id" component={UpdatePatientGroup} />
 
 
-       <Route exact path="/self" component={SelfTest} />
+
+
+
+
+
+
+
+       <Prodected exact path="/self" component={SelfTest} />
 
       </Switch>
       {/* <Footer /> */}
